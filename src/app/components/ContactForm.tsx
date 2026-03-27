@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AppleGlassButton } from "./AppleGlassButton";
 
 type FormState = { name: string; email: string; message: string };
 type Status = "idle" | "loading" | "success";
@@ -82,20 +83,22 @@ export function ContactForm() {
           placeholder="What are you working on?"
         />
       </div>
-      <button
-        type="submit"
+      <AppleGlassButton
+        variant="accent"
+        size="lg"
         disabled={status === "loading"}
-        className="w-full rounded-lg bg-neutral-900 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-900 px-5 py-2.5 text-sm font-semibold hover:bg-neutral-700 dark:hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full"
+        onClick={() => {}}
       >
         {status === "loading" ? (
           <>
-            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-neutral-500 dark:border-neutral-400 border-t-neutral-100 dark:border-t-neutral-900" />
+            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-blue-300/70 border-t-blue-100" />
             Sending…
           </>
         ) : (
           "Send message"
         )}
-      </button>
+      </AppleGlassButton>
     </form>
   );
 }
