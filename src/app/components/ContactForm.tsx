@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { AppleGlassButton } from "./AppleGlassButton";
 
 type FormState = { name: string; email: string; message: string };
 type Status = "idle" | "loading" | "success";
@@ -26,19 +25,19 @@ export function ContactForm() {
   }
 
   const inputClass =
-    "w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-3.5 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-600 transition-shadow";
-  const labelClass = "block text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-1.5";
+    "w-full rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-shadow";
+  const labelClass = "block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5";
 
   if (status === "success") {
     return (
-      <div className="rounded-xl border border-emerald-200 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-950/20 p-6 text-center space-y-2">
-        <p className="font-semibold text-emerald-700 dark:text-emerald-400">Message sent!</p>
-        <p className="text-sm text-neutral-500 dark:text-neutral-500">
+      <div className="rounded-xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20 p-6 text-center space-y-2">
+        <p className="font-semibold text-green-700 dark:text-green-400">Message sent!</p>
+        <p className="text-sm text-slate-600 dark:text-slate-400">
           Your email client should have opened. I&apos;ll get back to you soon.
         </p>
         <button
           onClick={() => { setStatus("idle"); setForm({ name: "", email: "", message: "" }); }}
-          className="text-sm text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors mt-2"
+          className="text-sm text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors mt-2"
         >
           Send another
         </button>
@@ -83,22 +82,20 @@ export function ContactForm() {
           placeholder="What are you working on?"
         />
       </div>
-      <AppleGlassButton
-        variant="accent"
-        size="lg"
+      <button
+        type="submit"
         disabled={status === "loading"}
-        className="w-full"
-        onClick={() => {}}
+        className="w-full px-8 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
       >
         {status === "loading" ? (
           <>
-            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-blue-300/70 border-t-blue-100" />
+            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-blue-200 border-t-white" />
             Sending…
           </>
         ) : (
-          "Send message"
+          "Send Message"
         )}
-      </AppleGlassButton>
+      </button>
     </form>
   );
 }
