@@ -27,19 +27,19 @@ function GlassMorphSphere({ position, scale = 1, speed = 1 }: {
       <mesh ref={meshRef} position={position} geometry={geometry}>
         <MeshTransmissionMaterial
           backside
-          samples={32}
-          resolution={1024}
+          samples={8} // Reduced from 32 for performance
+          resolution={256} // Reduced from 1024 for performance  
           transmission={0.95}
           roughness={0.05}
           thickness={scale * 0.8}
           ior={1.33}
-          chromaticAberration={0.15}
-          anisotropy={0.3}
-          distortion={0.4}
-          distortionScale={0.8}
-          temporalDistortion={0.2}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
+          chromaticAberration={0.1} // Reduced effect
+          anisotropy={0.2} // Reduced effect
+          distortion={0.3} // Reduced effect
+          distortionScale={0.6} // Reduced effect
+          temporalDistortion={0.1} // Reduced effect
+          clearcoat={0.5} // Reduced effect
+          clearcoatRoughness={0.2}
           attenuationDistance={0.5}
           attenuationColor="#ffffff"
         />
@@ -145,15 +145,21 @@ export function AppleLiquidGlass() {
         camera={{ position: [0, 0, 12], fov: 35 }}
         gl={{ 
           alpha: true, 
-          antialias: true,
+          antialias: false, // Disable antialiasing for better performance
           powerPreference: "high-performance",
-          precision: "highp"
+          precision: "mediump" // Lower precision for better performance
         }}
-        dpr={[1, 2]}
+        dpr={[0.5, 1.5]} // Lower DPR range for better performance
         style={{ background: 'transparent' }}
+        performance={{ min: 0.5 }} // Adaptive performance
       >
         <AppleLiquidGlassScene />
       </Canvas>
+      
+      {/* Performance indicator */}
+      <div className="fixed bottom-4 right-4 z-50 text-xs text-white/50 font-mono">
+        High Performance Mode
+      </div>
     </div>
   )
 }

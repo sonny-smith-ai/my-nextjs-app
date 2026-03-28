@@ -1,8 +1,12 @@
+'use client'
+
 import { ThemeToggle } from "./components/ThemeToggle";
 import { ScrollReveal } from "./components/ScrollReveal";
 import { ContactForm } from "./components/ContactForm";
 import { AppleLiquidGlass } from "./components/AppleLiquidGlass";
 import { GlassCard, GlassSection } from "./components/GlassCard";
+import { LightweightBackground } from "./components/LightweightBackground";
+import { usePerformanceDetection } from "./components/PerformanceDetector";
 
 const capabilities = [
   {
@@ -61,10 +65,16 @@ const projects = [
 ];
 
 export default function Home() {
+  const performance = usePerformanceDetection()
+  
   return (
     <main className="relative min-h-screen overflow-hidden">
-      {/* Apple Liquid Glass Background */}
-      <AppleLiquidGlass />
+      {/* Conditional background based on device performance */}
+      {performance.isLowEnd || performance.isMobile ? (
+        <LightweightBackground />
+      ) : (
+        <AppleLiquidGlass />
+      )}
       
       {/* Dynamic gradient background */}
       <div className="fixed inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20 -z-5" />
